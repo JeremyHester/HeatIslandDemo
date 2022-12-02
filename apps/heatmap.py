@@ -6,7 +6,7 @@ def app():
 
     st.title("Heatmap")
 
-    filepath = "https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/us_cities.csv"
+    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
     m = leafmap.Map(tiles="stamentoner")
     m.add_heatmap(
         filepath,
