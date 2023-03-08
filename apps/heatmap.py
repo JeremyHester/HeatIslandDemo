@@ -15,7 +15,7 @@ m.add_heatmap(
     latitude="latitude",
     longitude='longitude',
     value="temp",
-    name="Heat map",
+    name="humidity",
     radius=20,
     )
     m.to_streamlit(height=700)
