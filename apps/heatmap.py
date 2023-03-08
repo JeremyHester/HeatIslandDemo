@@ -14,7 +14,7 @@ m.add_heatmap(
     filepath,
     latitude="latitude",
     longitude='longitude',
-    value="Temp",
+    value="temp",
     name="Heat map",
     radius=20,
     )
