@@ -15,7 +15,7 @@ def app():
     latitude="latitude",
     longitude='longitude',
     value="temp",
-    name="date",
+    name="Heat map",
     radius=20,
     )
     m.to_streamlit(height=700)
