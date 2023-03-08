@@ -38,12 +38,12 @@ with st.sidebar:
         """
         This web app is created for use by Texas State University and Ingram School of Engineering. 
         
-        Source code: <https://github.com/HeatIslandDemo>
+        
 
  
     """
     )
-
+#Source code: <https://github.com/HeatIslandDemo>
 for app in apps:
     if app["title"] == selected:
         app["func"]()
