@@ -7,7 +7,7 @@ def app():
 
     st.markdown(
         """
-  "Use the Heatmap tab to view your data!"
+  Use the Heatmap tab to view your map and the Data Set to see the raw data 
 
     """
     )
