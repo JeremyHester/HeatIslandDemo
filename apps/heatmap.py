@@ -14,7 +14,7 @@ def app():
     filepath,
     latitude="latitude",
     longitude='longitude',
-    value="temp",
+    value="pop_max",
     name="Heat map",
     radius=20,
     )
