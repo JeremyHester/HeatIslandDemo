@@ -3,7 +3,6 @@ import streamlit as st
 #import leafmap.leafmap as leafmap
 import pandas as pd
 import plotly.express as px
-import numpy as np
 
 def app():
 
