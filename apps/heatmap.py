@@ -3,6 +3,7 @@ import streamlit as st
 #import leafmap.leafmap as leafmap
 import pandas as pd
 import plotly.express as px
+import numpy as np
 
 def app():
 
@@ -10,19 +11,18 @@ def app():
    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
    data = pd.read_csv(filepath, header= None)
 
-   # Create a correlation matrix from the data
-   corr_matrix = data.corr()
-
-  # Create a Plotly scattermapbox object
-   map_fig = px.scatter_mapbox(data, lat='latitude', lon='longitude', color=corr_matrix)
+   # Create a Plotly scattermapbox object
+   map_fig = px.scatter_mapbox(data, lat='latitude', lon='longitude', color='temperature', size='humidity')
 
    # Add hover information
-   map_fig.update_layout(title='Correlation Matrix Heatmap on Map', mapbox_style='open-street-map')
-   map_fig.update_traces(hovertemplate='Latitude: %{lat}<br>Longitude: %{lon}<br>Correlation: %{marker.color:.2f}')
+   map_fig.update_layout(title='Temperature and Humidity on Map', mapbox_style='open-street-map')
+   map_fig.update_traces(hovertemplate='Latitude: %{lat}<br>Longitude: %{lon}<br>Temperature: %{marker.color:.2f}<br>Humidity: %{marker.size:.2f}')
+
+   # Update the color scale
+   map_fig.update_traces(marker=dict(colorscale='Viridis', showscale=True))
 
    # Display the plot in Streamlit
    st.plotly_chart(map_fig, use_container_width=True)
-   
    
    
    #m = leafmap.Map(tiles="stamentoner")
