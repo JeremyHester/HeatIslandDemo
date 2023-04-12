@@ -5,7 +5,9 @@ jupyter-server-proxy
 keplergl
 leafmap
 localtileserver
+matplotlib
 nbserverproxy
+seaborn
 streamlit
 streamlit-option-menu
 
