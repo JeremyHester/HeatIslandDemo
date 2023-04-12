@@ -11,7 +11,7 @@ def app():
    data = pd.read_csv(filepath, header= None)
 
    # Create a Plotly scattermapbox object
-   map_fig = px.scatter_mapbox(data, lat='latitude', lon='longitude', color='temperature')
+   map_fig = px.scatter_mapbox(data, lat=4, lon=5, color=2)
 
    # Add hover information
    map_fig.update_layout(title='Temperature on Map', mapbox_style='open-street-map')
