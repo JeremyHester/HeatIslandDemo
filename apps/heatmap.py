@@ -20,8 +20,8 @@ def app():
    fig.update_layout(title='Correlation Matrix Heatmap', xaxis_title='Columns', yaxis_title='Columns')
    fig.update_traces(hovertemplate='Column X: %{x}<br>Column Y: %{y}<br>Correlation: %{z:.2f}')
 
-   # Show the plot
-   fig.show()
+   # Display the plot in Streamlit
+   st.plotly_chart(fig, use_container_width=True)
    
    
    
