@@ -7,9 +7,9 @@ def app():
     st.title("Heatmap")
 
     filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
-   # m = leafmap.Map(tiles="stamentoner")
+    m = leafmap.Map(tiles="stamentoner")
     m = leafmap.Map()
-    #m.add_basemap("Stamen.Toner")
+    m.add_basemap("Stamen.Toner")
     m.add_heatmap(
     filepath,
     latitude="latitude",
