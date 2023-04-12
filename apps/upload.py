@@ -15,7 +15,7 @@ def app():
 filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
 
 # Read the CSV file into a DataFrame
-df = pd.read_csv(filepath)
+df = pd.read_csv(filepath, usecols=lambda column : column not in [0,1,5]
 
 # Display all rows of the DataFrame
 st.write(df)
