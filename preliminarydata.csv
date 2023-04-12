@@ -1,4 +1,4 @@
-date,time,temperature,latitude,longitude,satellites
+date,time,temperature,humidity,latitude,longitude,satellites
 2/28/2023,14:0:56,97.18,23.41,29.889718,-97.94368298,4,
 2/28/2023,14:0:56,97.03,23.77,29.889718,-97.94368298,4,
 2/28/2023,14:0:56,96.33,24.20,29.889718,-97.94368298,4,
