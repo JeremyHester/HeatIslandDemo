@@ -1,7 +1,7 @@
 import os
 import geopandas as gpd
 import streamlit as st
-
+import pandas as pd
 
 def save_uploaded_file(file_content, file_name):
     """
@@ -25,6 +25,21 @@ def app():
 
     st.title("Raw Data Collected")
 
+    
+    
+
+# Define the file path for the CSV file
+file_path = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
+
+# Read the CSV file into a DataFrame
+df = pd.read_csv(file_path)
+
+# Display all rows of the DataFrame
+print(df)
+    
+    
+    
+    
     #row1_col1, row1_col2 = st.columns([2, 1])
     #width = 950
     #height = 600
