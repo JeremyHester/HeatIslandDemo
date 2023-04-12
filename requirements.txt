@@ -11,4 +11,3 @@ os
 seaborn
 streamlit
 streamlit-option-menu
-system
