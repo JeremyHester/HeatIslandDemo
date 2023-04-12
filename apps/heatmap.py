@@ -14,10 +14,10 @@ def app():
    # Generate a correlation matrix for the DataFrame
    corr_matrix = df.corr()
    # Create a heatmap of the correlation matrix using Seaborn
-   fig, ax = plt.subplots(figsize=(10,10))
-   sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', ax=ax)
+   #fig, ax = plt.subplots(figsize=(10,10))
+   sns.heatmap(corr_matrix, annot=True, cmap='coolwarm')
    # Display the heatmap in the app
-   st.pyplot(fig)
+   plt.show()
    
    
    
