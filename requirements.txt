@@ -7,7 +7,6 @@ leafmap
 localtileserver
 matplotlib
 nbserverproxy
-os
 seaborn
 streamlit
 streamlit-option-menu
