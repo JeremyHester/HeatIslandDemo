@@ -1,6 +1,6 @@
 import os 
 import streamlit as st
-import matplotlib as mp
+import matplotlib as plt
 #import leafmap.leafmap as leafmap
 import pandas as pd
 import seaborn as sns
