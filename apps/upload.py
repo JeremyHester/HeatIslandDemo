@@ -35,7 +35,7 @@ file_path = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/maste
 df = pd.read_csv(file_path)
 
 # Display all rows of the DataFrame
-print(df)
+st.write(df)
     
     
     
