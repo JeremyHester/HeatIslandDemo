@@ -12,10 +12,10 @@ def app():
     
 
 # Define the file path for the CSV file
-file_path = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
+filepath = "https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/us_cities.csv"
 
 # Read the CSV file into a DataFrame
-df = pd.read_csv(file_path)
+df = pd.read_csv(filepath)
 
 # Display all rows of the DataFrame
 st.write(df)
