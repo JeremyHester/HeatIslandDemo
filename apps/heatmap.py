@@ -18,10 +18,10 @@ def app():
       #sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', ax=ax)
    # Display the heatmap in the app
       #st.pyplot(fig)
-    m = leafmap.Map(tiles="stamentoner")
-    m = leafmap.Map()
-    m.add_basemap("Stamen.Toner")
-    m.add_heatmap(
+   m = leafmap.Map(tiles="stamentoner")
+   m = leafmap.Map()
+   m.add_basemap("Stamen.Toner")
+   m.add_heatmap(
        filepath,
        latitude="latitude",
        longitude='longitude',
