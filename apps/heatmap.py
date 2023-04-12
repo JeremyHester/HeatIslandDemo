@@ -28,12 +28,12 @@ def app():
     m = leafmap.Map()
     m.add_basemap("Stamen.Toner")
     m.add_heatmap(
-    filepath,
-    latitude="latitude",
-    longitude='longitude',
-    value="temperature",
-    name="Heat map",
-    radius=20,
+       filepath,
+       latitude="latitude",
+       longitude='longitude',
+       value="temperature",
+       name="Heat map",
+       radius=20,
     )
     m.to_streamlit(height=700)
 
