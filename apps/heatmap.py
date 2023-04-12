@@ -19,7 +19,7 @@ def app():
    map_fig.update_traces(hovertemplate='Latitude: %{lat}<br>Longitude: %{lon}<br>Temperature: %{marker.color:.2f}')
 
    # Update the color scale
-     map_fig.update_traces(marker=dict(colorscale='Viridis', showscale=True))
+    map_fig.update_traces(marker=dict(colorscale='Viridis', showscale=True))
 
    # Display the plot in Streamlit
    st.plotly_chart(map_fig, use_container_width=True)
