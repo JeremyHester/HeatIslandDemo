@@ -9,7 +9,7 @@ def app():
     filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
    # m = leafmap.Map(tiles="stamentoner")
     m = leafmap.Map()
-    m.add_basemap("Stamen.Toner")
+    #m.add_basemap("Stamen.Toner")
     m.add_heatmap(
     filepath,
     latitude="latitude",
@@ -19,3 +19,14 @@ def app():
     radius=20,
     )
     m.to_streamlit(height=700)
+
+  #     filepath = "https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/us_cities.csv"
+   # m = leafmap.Map(tiles="stamentoner")
+    #m.add_heatmap(
+     #   filepath,
+      #  latitude="latitude",
+       # longitude="longitude",
+        #value="pop_max",
+        #name="Heat map",
+        #radius=20,
+    #)
