@@ -9,6 +9,8 @@ def app():
    st.title("Heatmap")
    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
    data = pd.read_csv(filepath, header= None)
+   data['latitude'] = pd.to_numeric(data['latitude'], errors='coerce')
+   data['longitude'] = pd.to_numeric(data['longitude'], errors='coerce')
 
    # Create a Plotly scattermapbox object
    map_fig = px.scatter_mapbox(data, lat=4, lon=5, color=2)
