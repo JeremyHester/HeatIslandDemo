@@ -17,7 +17,7 @@ def app():
 
    # Add hover information
    map_fig.update_layout(title='Temperature on Map', mapbox_style='open-street-map')
-   map_fig.update_traces(hovertemplate='Latitude: {4}<br>Longitude: {5}<br>Temperature: %{marker.color:.2f}')
+   map_fig.update_traces(hovertemplate='Latitude: %{4}<br>Longitude: %{5}<br>Temperature: %{marker.color:.2f}')
 
    # Update the color scale
    map_fig.update_traces(marker=dict(colorscale='Viridis', showscale=True))
