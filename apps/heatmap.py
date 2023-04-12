@@ -1,5 +1,5 @@
 import streamlit as st
-import matplotlib mp
+import matplotlib as mp
 #import leafmap.leafmap as leafmap
 import pandas as pd
 import seaborn as sns
