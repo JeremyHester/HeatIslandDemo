@@ -8,7 +8,7 @@ def app():
 
    st.title("Heatmap")
    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
-   data = pd.read_csv(filepath)
+   data = pd.read_csv(filepath, header= None)
 
    # Create a correlation matrix from the data
    corr_matrix = data.corr()
