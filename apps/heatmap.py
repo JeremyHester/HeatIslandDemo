@@ -1,29 +1,29 @@
 import os 
 import streamlit as st
-#import leafmap.leafmap as leafmap
 import pandas as pd
-import plotly.express as px
+import folium.plugins as plugins
+from folium.plugins import HeatMap
+
 
 def app():
 
    st.title("Heatmap")
    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
    data = pd.read_csv(filepath, header= None)
-   data[4] = pd.to_numeric(data[5], errors='coerce')
-   data[4] = pd.to_numeric(data[5], errors='coerce')
+   map_center = [data['latitude'][0], data['longitude'][0]]
+   heat_map = folium.Map(location=map_center, zoom_start=12)
 
-   # Create a Plotly scattermapbox object
-   map_fig = px.scatter_mapbox(data, lat=4, lon=5, color=2)
+   # Create a HeatMap object and add it to the map
+   heatmap_data = data[['latitude', 'longitude', 'temperature']]
+   heatmap_data = heatmap_data.dropna()  # Remove rows with missing data
+   heatmap_data = heatmap_data.values.tolist()
+   HeatMap(heatmap_data, name='Temperature Heatmap').add_to(heat_map)
 
-   # Add hover information
-   map_fig.update_layout(title='Temperature on Map', mapbox_style='open-street-map')
-   map_fig.update_traces(hovertemplate='Latitude: %{4}<br>Longitude: %{5}<br>Temperature: %{marker.color:.2f}')
+   # Add layer control to the map
+   folium.LayerControl().add_to(heat_map)
 
-   # Update the color scale
-   map_fig.update_traces(marker=dict(colorscale='Viridis', showscale=True))
-
-   # Display the plot in Streamlit
-   st.plotly_chart(map_fig, use_container_width=True)
+   # Display the map using Streamlit
+   st.write(heat_map._repr_html_(), unsafe_allow_html=True)
    
    #m = leafmap.Map(tiles="stamentoner")
    #m = leafmap.Map()
