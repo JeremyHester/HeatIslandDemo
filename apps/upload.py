@@ -21,6 +21,31 @@ df = pd.read_csv(file_path)
 st.write(df)
     
     
+
+  
+
+# Read the CSV file into a DataFrame
+#df = pd.read_csv(file_path)
+
+# Convert the date and time columns to datetime format
+#df['datetime'] = pd.to_datetime(df['date'] + ' ' + df['time'])
+
+# Drop the original date and time columns
+#df.drop(['date', 'time'], axis=1, inplace=True)
+
+# Generate a correlation matrix for the DataFrame
+#corr_matrix = df.corr()
+
+# Create a heatmap of the correlation matrix using Seaborn
+#fig, ax = plt.subplots(figsize=(10,10))
+#sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', ax=ax)
+
+# Display the heatmap in the app
+#st.pyplot(fig)
+    
+    
+    
+    
     
     
     #row1_col1, row1_col2 = st.columns([2, 1])
