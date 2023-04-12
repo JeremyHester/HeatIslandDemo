@@ -12,18 +12,17 @@ def app():
    data = pd.read_csv(filepath, header= None)
 
    # Create a Plotly scattermapbox object
-   map_fig = px.scatter_mapbox(data, lat='latitude', lon='longitude', color='temperature', size='humidity')
+   map_fig = px.scatter_mapbox(data, lat='latitude', lon='longitude', color='temperature')
 
    # Add hover information
-   map_fig.update_layout(title='Temperature and Humidity on Map', mapbox_style='open-street-map')
-   map_fig.update_traces(hovertemplate='Latitude: %{lat}<br>Longitude: %{lon}<br>Temperature: %{marker.color:.2f}<br>Humidity: %{marker.size:.2f}')
+   map_fig.update_layout(title='Temperature on Map', mapbox_style='open-street-map')
+   map_fig.update_traces(hovertemplate='Latitude: %{lat}<br>Longitude: %{lon}<br>Temperature: %{marker.color:.2f}')
 
    # Update the color scale
-   map_fig.update_traces(marker=dict(colorscale='Viridis', showscale=True))
+     map_fig.update_traces(marker=dict(colorscale='Viridis', showscale=True))
 
    # Display the plot in Streamlit
    st.plotly_chart(map_fig, use_container_width=True)
-   
    
    #m = leafmap.Map(tiles="stamentoner")
    #m = leafmap.Map()
