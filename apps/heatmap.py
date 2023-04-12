@@ -1,23 +1,27 @@
 import os 
 import streamlit as st
-import matplotlib as plt
 #import leafmap.leafmap as leafmap
 import pandas as pd
-import seaborn as sns
+import plotly.express as px
 
 def app():
 
    st.title("Heatmap")
    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
-   # Read the CSV file into a DataFrame
-   df = pd.read_csv(filepath)
-   # Generate a correlation matrix for the DataFrame
-   corr_matrix = df.corr()
-   # Create a heatmap of the correlation matrix using Seaborn
-   #fig, ax = plt.subplots(figsize=(10,10))
-   sns.heatmap(corr_matrix, annot=True, cmap='coolwarm')
-   # Display the heatmap in the app
-   plt.show()
+   data = pd.read_csv(filepath)
+
+   # Create a correlation matrix from the data
+   corr_matrix = data.corr()
+
+   # Create a heatmap using Plotly
+   fig = px.imshow(corr_matrix, x=corr_matrix.columns, y=corr_matrix.columns)
+
+   # Add hover information
+   fig.update_layout(title='Correlation Matrix Heatmap', xaxis_title='Columns', yaxis_title='Columns')
+   fig.update_traces(hovertemplate='Column X: %{x}<br>Column Y: %{y}<br>Correlation: %{z:.2f}')
+
+   # Show the plot
+   fig.show()
    
    
    
