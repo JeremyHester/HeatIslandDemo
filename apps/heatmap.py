@@ -8,19 +8,19 @@ import seaborn as sns
 def app():
 
    st.title("Heatmap")
-      filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
-      # Read the CSV file into a DataFrame
-      df = pd.read_csv(filepath)
+   filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
+   # Read the CSV file into a DataFrame
+   df = pd.read_csv(filepath)
 
-      # Generate a correlation matrix for the DataFrame
-      corr_matrix = df.corr()
+   # Generate a correlation matrix for the DataFrame
+   corr_matrix = df.corr()
 
-      # Create a heatmap of the correlation matrix using Seaborn
-      fig, ax = plt.subplots(figsize=(10,10))
-      sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', ax=ax)
+   # Create a heatmap of the correlation matrix using Seaborn
+   fig, ax = plt.subplots(figsize=(10,10))
+   sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', ax=ax)
 
-      # Display the heatmap in the app
-      st.pyplot(fig)
+   # Display the heatmap in the app
+   st.pyplot(fig)
 
 
 
