@@ -8,7 +8,7 @@ def app():
 
     st.title("Heatmap")
 
-    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
+    file_path = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
   # Read the CSV file into a DataFrame, while ignoring columns 1, 2, and 6
 df = pd.read_csv(file_path, usecols=lambda column : column not in [0,1,5])
 
