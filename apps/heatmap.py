@@ -25,19 +25,51 @@ def app():
    # Display the map using Streamlit
    st.write(heat_map._repr_html_(), unsafe_allow_html=True)
    
-   #m = leafmap.Map(tiles="stamentoner")
-   #m = leafmap.Map()
-   #m.add_basemap("Stamen.Toner")
-   #m.add_heatmap(
-    #   filepath,
-     #  latitude="latitude",
-      # longitude='longitude',
-       #value="temperature",
-      # name="Heat map",
-      # radius=20,
-    #)
-   #m.to_streamlit(height=700)
+   
+  # df = pd.read_csv("filepath")
 
+   # Select the desired columns
+ #  df = df.loc[:, ['date', 'time', 'temperature', 'humidity', 'latitude', 'longitude', 'satellites']]
+
+   # Drop rows with missing data
+ #  df = df.dropna()
+   
+ #  dfCopy = df.copy()
+
+ #  dfCopy.loc[:,'LATITUDE'] = ((dfCopy.loc[:, 'LATITUDE']*10).apply(np.floor))/10
+ #  dfCopy.loc[:,'LONGITUDE'] = ((dfCopy.loc[:, 'LONGITUDE']*10).apply(np.floor))/10
+ #  dfCopy.loc[:,'LatLonRange'] = dfCopy.loc[:,'LATITUDE'].map(str) + '-' + dfCopy.loc[:, 'LONGITUDE'].map(str)
+
+ #  df_grouped = dfCopy.groupby(['LatLonRange', 'LATITUDE', 'LONGITUDE'])
+
+ #  df_grouped.head()
+   
+   
+#   df_folium = pd.DataFrame({'Lat':fire_count['LATITUDE'],'Long':fire_count['LONGITUDE'],'Count':fire_count['count']})
+
+#   df_folium['weight'] = df_folium['Count'] / df_folium['Count'].abs().max()
+
+ #  def generateBaseMap(loc, zoom=4, tiles='OpenStreetMap', crs='ESPG2263'):
+ #  return folium.Map(location=loc,
+  #                 control_scale=True, 
+  #                 zoom_start=zoom,
+  #                 tiles=tiles)
+ # 
+#   base_map = generateBaseMap([39, -98] )
+
+#  map_values1 = df_folium[['Lat','Long','weight']]
+
+ #  data = map_values1.values.tolist()
+           
+ #  hm = HeatMap(data,gradient={0.1: 'blue', 0.3: 'lime', 0.5: 'yellow', 0.7: 'orange', 1: 'red'}, 
+ #               min_opacity=0.05, 
+ #               max_opacity=0.9, 
+ #               radius=25,
+ #               use_local_extrema=False)#.add_to(base_map)
+
+ #  base_map.add_child(hm)
+
+  
     
     
     
@@ -48,14 +80,4 @@ def app():
     
     
     
-    
-  #     filepath = "https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/us_cities.csv"
-   # m = leafmap.Map(tiles="stamentoner")
-    #m.add_heatmap(
-     #   filepath,
-      #  latitude="latitude",
-       # longitude="longitude",
-        #value="pop_max",
-        #name="Heat map",
-        #radius=20,
-    #)
+ 
