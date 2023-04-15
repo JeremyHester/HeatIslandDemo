@@ -17,7 +17,7 @@ filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master
 df = pd.read_csv(filepath)
 
 # Display the DataFrame in the app with adjusted height and width
-st.write(df, height=400, width=800)
+st.write(df, height=200, width=400)
 
 
 
