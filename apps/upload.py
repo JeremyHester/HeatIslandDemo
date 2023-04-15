@@ -14,13 +14,24 @@ def app():
 # Define the file path for the CSV file
 filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
 
-# Read the CSV file into a DataFrame
-df = pd.read_csv(filepath)
+df = pd.read_csv(file_path)
 
-st.set_page_config(page_title="Streamlit Geospatial", layout="centered")
+# Display the DataFrame in the app with adjusted height and width
+st.write(df, height=400, width=800)
+
+
+
+
+
+
+
+
+
+# Read the CSV file into a DataFrame
+#df = pd.read_csv(filepath)
 
 # Display all rows of the DataFrame
-st.write(df)
+#st.write(df)
     
     
 
