@@ -12,13 +12,15 @@ def app():
     
 
 # Define the file path for the CSV file
-#filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
+filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
 
 # Read the CSV file into a DataFrame
-#df = pd.read_csv(filepath)
+df = pd.read_csv(filepath)
+
+st.set_page_config(page_title="Streamlit Geospatial", layout="centered")
 
 # Display all rows of the DataFrame
-#st.write(df)
+st.write(df)
     
     
 
