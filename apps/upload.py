@@ -14,7 +14,7 @@ def app():
 # Define the file path for the CSV file
 filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
 
-df = pd.read_csv(file_path)
+df = pd.read_csv(filepath)
 
 # Display the DataFrame in the app with adjusted height and width
 st.write(df, height=400, width=800)
