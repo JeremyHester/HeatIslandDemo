@@ -8,6 +8,13 @@ from folium.plugins import HeatMap
 
 #reconnecting
 
+# Function to convert folium map to HTML
+   def folium_html(m):
+    """Converts folium map to HTML"""
+    srcdoc = m._repr_html_()
+    return srcdoc
+
+
 def app():
 
    st.title("Heatmap")
@@ -39,11 +46,7 @@ def app():
    # Display map in Streamlit app
    st.markdown(folium_html(m), unsafe_allow_html=True)
 
-   # Function to convert folium map to HTML
-   def folium_html(m):
-    """Converts folium map to HTML"""
-    srcdoc = m._repr_html_()
-    return srcdoc
+   
 
    
    
