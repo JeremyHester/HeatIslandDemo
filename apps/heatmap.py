@@ -28,7 +28,7 @@ def app():
    # Create feature group for temperature data
    temp_data = folium.FeatureGroup(name='Temperature Data')
    temperatures = list(df['temperature'])
-   cmap = folium.colormap.LinearColormap(['blue', 'green', 'yellow', 'red'], vmin=min(temperatures), vmax=max(temperatures))
+   cmap = folium.LinearColormap(['blue', 'green', 'yellow', 'red'], vmin=min(temperatures), vmax=max(temperatures))
    for location, temp in zip(locations, temperatures):
        temp_data.add_child(folium.Marker(location=location, icon=folium.Icon(color=cmap(temp), icon='info-sign')))
    m.add_child(temp_data)
