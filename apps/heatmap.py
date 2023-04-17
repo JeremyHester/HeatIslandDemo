@@ -11,26 +11,63 @@ def app():
 
    st.title("Heatmap")
    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
-   data = pd.read_csv(filepath)
+   
+import pandas as pd
+import numpy as np
+import folium
 
-   # Find the first non-zero value for latitude and longitude
-   first_lat = data.loc[data['latitude']!=0]['latitude'].iloc[0]
-   first_long = data.loc[data['longitude']!=0]['longitude'].iloc[0]
+# Load data
+df = pd.read_csv('preliminarydata.csv')
 
-   # Create the map centered at the first non-zero latitude and longitude value
-   map_center = [first_lat, first_long]
-   my_map = folium.Map(location=map_center, zoom_start=12)
+# Create map object
+m = folium.Map(location=[df['Latitude'].iloc[0], df['Longitude'].iloc[0]], zoom_start=10)
 
-   # Add the heatmap layer to the map
-   heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
-   heat_map = folium.plugins.HeatMap(heat_data)
-   heat_map.add_to(my_map)
+# Create feature group for path walked
+path = folium.FeatureGroup(name='Path Walked')
+locations = list(zip(df['Latitude'], df['Longitude']))
+path.add_child(folium.PolyLine(locations=locations, color='blue', weight=5))
+m.add_child(path)
 
-   # Display the map using Streamlit
-   st.markdown(my_map._repr_html_(), unsafe_allow_html=True)
+# Create feature group for temperature data
+temp_data = folium.FeatureGroup(name='Temperature Data')
+temperatures = list(df['Temperature'])
+cmap = folium.colormap.LinearColormap(['blue', 'green', 'yellow', 'red'], vmin=min(temperatures), vmax=max(temperatures))
+for location, temp in zip(locations, temperatures):
+    temp_data.add_child(folium.Marker(location=location, icon=folium.Icon(color=cmap(temp), icon='info-sign')))
+m.add_child(temp_data)
 
-if __name__ == '__main__':
-    app()
+# Add layer control
+folium.LayerControl().add_to(m)
+
+# Display map
+m
+
+   
+   
+   
+   
+#    data = pd.read_csv(filepath)
+
+#    # Find the first non-zero value for latitude and longitude
+#    first_lat = data.loc[data['latitude']!=0]['latitude'].iloc[0]
+#    first_long = data.loc[data['longitude']!=0]['longitude'].iloc[0]
+
+#    # Create the map centered at the first non-zero latitude and longitude value
+#    map_center = [first_lat, first_long]
+#    my_map = folium.Map(location=map_center, zoom_start=12)
+
+#    # Add the heatmap layer to the map
+#    heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
+#    heat_map = folium.plugins.HeatMap(heat_data)
+#    heat_map.add_to(my_map)
+
+#    # Display the map using Streamlit
+#    st.markdown(my_map._repr_html_(), unsafe_allow_html=True)
+
+
+
+# if __name__ == '__main__':
+#     app()
    
    
   # df = pd.read_csv("filepath")
