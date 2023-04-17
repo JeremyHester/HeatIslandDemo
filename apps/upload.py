@@ -12,12 +12,12 @@ def app():
     
 
 # Define the file path for the CSV file
-#filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
+filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
 
-#df = pd.read_csv(filepath)
+df = pd.read_csv(filepath)
 
 # Display the DataFrame in the app with adjusted height and width
-#st.write(df, height=200, width=100)
+st.write(df, height=200, width=100)
 
 
 
@@ -28,10 +28,10 @@ def app():
 
 
 # Read the CSV file into a DataFrame
-#df = pd.read_csv(filepath)
+df = pd.read_csv(filepath)
 
 # Display all rows of the DataFrame
-#st.write(df)
+st.write(df)
     
     
 
