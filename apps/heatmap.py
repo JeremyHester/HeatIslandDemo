@@ -21,13 +21,13 @@ def app():
 
    # Create feature group for path walked
    path = folium.FeatureGroup(name='Path Walked')
-   locations = list(zip(df['Latitude'], df['Longitude']))
+   locations = list(zip(df['latitude'], df['longitude']))
    path.add_child(folium.PolyLine(locations=locations, color='blue', weight=5))
    m.add_child(path)
 
    # Create feature group for temperature data
    temp_data = folium.FeatureGroup(name='Temperature Data')
-   temperatures = list(df['Temperature'])
+   temperatures = list(df['temperature'])
    cmap = folium.colormap.LinearColormap(['blue', 'green', 'yellow', 'red'], vmin=min(temperatures), vmax=max(temperatures))
    for location, temp in zip(locations, temperatures):
        temp_data.add_child(folium.Marker(location=location, icon=folium.Icon(color=cmap(temp), icon='info-sign')))
