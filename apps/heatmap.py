@@ -9,8 +9,6 @@ from folium.plugins import HeatMap
 
 def app():
 
-  def main():
-
    st.title("Heatmap")
    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
    data = pd.read_csv(filepath)
@@ -31,8 +29,8 @@ def app():
    # Display the map using Streamlit
    st.markdown(my_map._repr_html_(), unsafe_allow_html=True)
 
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    app()
    
    
   # df = pd.read_csv("filepath")
