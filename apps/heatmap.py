@@ -10,7 +10,6 @@ def app():
    st.title("Heatmap")
    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
    data = pd.read_csv(filepath, header= None)
-   data = pd.read_csv('data.csv')
 
    # Find the first non-zero value for latitude and longitude
    first_lat = data.loc[data['latitude']!=0]['latitude'].iloc[0]
