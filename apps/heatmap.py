@@ -10,20 +10,23 @@ def app():
    st.title("Heatmap")
    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
    data = pd.read_csv(filepath, header= None)
-   map_center = [data['latitude'][0], data['longitude'][0]]
-   heat_map = folium.Map(location=map_center, zoom_start=12)
+   data = pd.read_csv('data.csv')
 
-   # Create a HeatMap object and add it to the map
-   heatmap_data = data[['latitude', 'longitude', 'temperature']]
-   heatmap_data = heatmap_data.dropna()  # Remove rows with missing data
-   heatmap_data = heatmap_data.values.tolist()
-   HeatMap(heatmap_data, name='Temperature Heatmap').add_to(heat_map)
+   # Find the first non-zero value for latitude and longitude
+   first_lat = data.loc[data['latitude']!=0]['latitude'].iloc[0]
+   first_long = data.loc[data['longitude']!=0]['longitude'].iloc[0]
 
-   # Add layer control to the map
-   folium.LayerControl().add_to(heat_map)
+   # Create the map centered at the first non-zero latitude and longitude value
+   map_center = [first_lat, first_long]
+   my_map = folium.Map(location=map_center, zoom_start=12)
+
+   # Add the heatmap layer to the map
+   heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
+   heat_map = folium.plugins.HeatMap(heat_data)
+   heat_map.add_to(my_map)
 
    # Display the map using Streamlit
-   st.write(heat_map._repr_html_(), unsafe_allow_html=True)
+   st.markdown(my_map._repr_html_(), unsafe_allow_html=True)
    
    
   # df = pd.read_csv("filepath")
