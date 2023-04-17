@@ -1,5 +1,4 @@
 ffmpeg
-folium
 gifsicle
 build-essential
 python3-dev
