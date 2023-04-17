@@ -5,6 +5,8 @@ from apps import home, heatmap, upload
 #import your app modules here
 
 st.set_page_config(page_title="Streamlit Geospatial", layout="centered")
+from streamlit import _config
+_config.set_option('deprecation.showfileUploaderEncoding', False)
 
 # A dictionary of apps in the format of {"App title": "App icon"}
 # More icons can be found here: https://icons.getbootstrap.com
