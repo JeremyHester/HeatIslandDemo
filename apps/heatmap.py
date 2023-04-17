@@ -1,6 +1,7 @@
 import os 
 import streamlit as st
 import pandas as pd
+import numpy as np
 import folium
 import folium.plugins as plugins
 from folium.plugins import HeatMap
@@ -11,36 +12,32 @@ def app():
 
    st.title("Heatmap")
    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
-   
-import pandas as pd
-import numpy as np
-import folium
 
-# Load data
-df = pd.read_csv('preliminarydata.csv')
+   # Load data
+   df = pd.read_csv('preliminarydata.csv')
 
-# Create map object
-m = folium.Map(location=[df['Latitude'].iloc[0], df['Longitude'].iloc[0]], zoom_start=10)
+   # Create map object
+   m = folium.Map(location=[df['Latitude'].iloc[0], df['Longitude'].iloc[0]], zoom_start=10)
 
-# Create feature group for path walked
-path = folium.FeatureGroup(name='Path Walked')
-locations = list(zip(df['Latitude'], df['Longitude']))
-path.add_child(folium.PolyLine(locations=locations, color='blue', weight=5))
-m.add_child(path)
+   # Create feature group for path walked
+   path = folium.FeatureGroup(name='Path Walked')
+   locations = list(zip(df['Latitude'], df['Longitude']))
+   path.add_child(folium.PolyLine(locations=locations, color='blue', weight=5))
+   m.add_child(path)
 
-# Create feature group for temperature data
-temp_data = folium.FeatureGroup(name='Temperature Data')
-temperatures = list(df['Temperature'])
-cmap = folium.colormap.LinearColormap(['blue', 'green', 'yellow', 'red'], vmin=min(temperatures), vmax=max(temperatures))
-for location, temp in zip(locations, temperatures):
-    temp_data.add_child(folium.Marker(location=location, icon=folium.Icon(color=cmap(temp), icon='info-sign')))
-m.add_child(temp_data)
+   # Create feature group for temperature data
+   temp_data = folium.FeatureGroup(name='Temperature Data')
+   temperatures = list(df['Temperature'])
+   cmap = folium.colormap.LinearColormap(['blue', 'green', 'yellow', 'red'], vmin=min(temperatures), vmax=max(temperatures))
+   for location, temp in zip(locations, temperatures):
+       temp_data.add_child(folium.Marker(location=location, icon=folium.Icon(color=cmap(temp), icon='info-sign')))
+   m.add_child(temp_data)
 
-# Add layer control
-folium.LayerControl().add_to(m)
+   # Add layer control
+   folium.LayerControl().add_to(m)
 
-# Display map
-m
+   # Display map
+   m
 
    
    
