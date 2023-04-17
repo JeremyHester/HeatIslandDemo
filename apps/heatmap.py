@@ -1,6 +1,7 @@
 import os 
 import streamlit as st
 import pandas as pd
+import folium
 import folium.plugins as plugins
 from folium.plugins import HeatMap
 
