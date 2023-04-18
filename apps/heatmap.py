@@ -76,7 +76,7 @@ def app():
    
 # Add the heatmap layer to the map
    heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
-   heat_map = folium.plugins.HeatMap(heat_data, gradient=gradient, min_opacity=0.2)
+   heat_map = folium.plugins.HeatMap(heat_data, gradient=gradient, min_opacity=0.8)
    heat_map.add_to(my_map)
 
 # Save map as HTML file
