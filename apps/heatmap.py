@@ -5,6 +5,7 @@ import numpy as np
 import folium
 import folium.plugins as plugins
 from folium.plugins import HeatMap
+import matplotlib.cm as cm
 
 #reconnecting
 
