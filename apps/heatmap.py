@@ -24,7 +24,7 @@ def app():
    df = pd.read_csv('preliminarydata.csv')
 
    # Create map object
-   m = folium.Map(location=[df['latitude'].iloc[0], df['longitude'].iloc[0]], zoom_start=10)
+   m = folium.Map(location=[df['latitude'].iloc[0], df['longitude'].iloc[0]], zoom_start=13)
 
    # Create feature group for path walked
    path = folium.FeatureGroup(name='Path Walked')
