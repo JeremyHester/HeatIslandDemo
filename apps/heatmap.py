@@ -66,15 +66,18 @@ def app():
    map_center = [first_lat, first_long]
    my_map = folium.Map(location=map_center, zoom_start=15)
 
-   gradient_ranges = [-20.0, 32.0, 50.0, 70.0, 90.0, 120.0]  # temperature ranges
-   gradient_colors = ['blue', 'green', 'yellow', 'orange','red']  # corresponding colors
-   
+   gradient_ranges = [-28.9, -16, 10, 21.1, 32.2, 48.9]  # temperature ranges in Celsius
+   gradient_colors = ['blue', 'green', 'yellow', 'orange', 'red']  # corresponding colors
+
 # Define the color gradient dictionary
    gradient_dict = {r: c for r, c in zip(gradient_ranges, gradient_colors)}
 
-   
+# Create a new DataFrame with the temperature in Celsius
+   data_celsius = data.copy()
+   data_celsius['temperature'] = (data_celsius['temperature'] - 32) * 5/9
+
 # Add the heatmap layer to the map
-   heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
+   heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data_celsius.iterrows()]
    heat_map = folium.plugins.HeatMap(heat_data, gradient=gradient_dict, min_opacity=0.8)
    heat_map.add_to(my_map)
 
@@ -92,59 +95,11 @@ def app():
    # st.markdown(my_map._repr_html_(), unsafe_allow_html=True)
 
 
-
-# if __name__ == '__main__':
-#     app()
-   
-   
-  # df = pd.read_csv("filepath")
-
-   # Select the desired columns
- #  df = df.loc[:, ['date', 'time', 'temperature', 'humidity', 'latitude', 'longitude', 'satellites']]
-
-   # Drop rows with missing data
- #  df = df.dropna()
-   
- #  dfCopy = df.copy()
-
- #  dfCopy.loc[:,'LATITUDE'] = ((dfCopy.loc[:, 'LATITUDE']*10).apply(np.floor))/10
- #  dfCopy.loc[:,'LONGITUDE'] = ((dfCopy.loc[:, 'LONGITUDE']*10).apply(np.floor))/10
- #  dfCopy.loc[:,'LatLonRange'] = dfCopy.loc[:,'LATITUDE'].map(str) + '-' + dfCopy.loc[:, 'LONGITUDE'].map(str)
-
- #  df_grouped = dfCopy.groupby(['LatLonRange', 'LATITUDE', 'LONGITUDE'])
-
- #  df_grouped.head()
-   
-   
-#   df_folium = pd.DataFrame({'Lat':fire_count['LATITUDE'],'Long':fire_count['LONGITUDE'],'Count':fire_count['count']})
-
-#   df_folium['weight'] = df_folium['Count'] / df_folium['Count'].abs().max()
-
- #  def generateBaseMap(loc, zoom=4, tiles='OpenStreetMap', crs='ESPG2263'):
- #  return folium.Map(location=loc,
-  #                 control_scale=True, 
-  #                 zoom_start=zoom,
-  #                 tiles=tiles)
- # 
-#   base_map = generateBaseMap([39, -98] )
-
-#  map_values1 = df_folium[['Lat','Long','weight']]
-
- #  data = map_values1.values.tolist()
-           
- #  hm = HeatMap(data,gradient={0.1: 'blue', 0.3: 'lime', 0.5: 'yellow', 0.7: 'orange', 1: 'red'}, 
- #               min_opacity=0.05, 
- #               max_opacity=0.9, 
- #               radius=25,
- #               use_local_extrema=False)#.add_to(base_map)
-
- #  base_map.add_child(hm)
-
   
     
     
     
-    
+  
     
     
     
