@@ -51,9 +51,9 @@ def app():
   # cmap = LinearColormap(colors=gradient_colors, vmin=min(gradient_ranges), vmax=max(gradient_ranges))
 
 # Add the heatmap layer to the map
-    heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
-    heat_map = folium.plugins.HeatMap(heat_data, gradient=colormap_dict, min_opacity=0.8)
-    heat_map.add_to(my_map)
+   heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
+   heat_map = folium.plugins.HeatMap(heat_data, gradient=colormap_dict, min_opacity=0.8)
+   heat_map.add_to(my_map)
 
 # Save map as HTML file
    my_map.save('map.html')
