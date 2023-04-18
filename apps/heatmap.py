@@ -66,18 +66,16 @@ def app():
    map_center = [first_lat, first_long]
    my_map = folium.Map(location=map_center, zoom_start=15)
 
-   gradient_ranges = [-28.9, -16, 10, 21.1, 32.2, 48.9]  # temperature ranges in Celsius
-   gradient_colors = ['blue', 'green', 'yellow', 'orange', 'red']  # corresponding colors
+   
+# Define the color gradient using the brunet colormap
+   gradient_ranges = [-20, 32, 50, 70, 90, 120]
+   gradient_colors = [cm.brunet(x) for x in range(0, 256, int(256/len(gradient_ranges)-1))]
 
-# Define the color gradient dictionary
-   gradient_dict = {r: c for r, c in zip(gradient_ranges, gradient_colors)}
-
-# Create a new DataFrame with the temperature in Celsius
-   data_celsius = data.copy()
-   data_celsius['temperature'] = (data_celsius['temperature'] - 32) * 5/9
+# Create the gradient dictionary
+   gradient_dict = {gradient_ranges[i]: gradient_colors[i] for i in range(len(gradient_ranges))}
 
 # Add the heatmap layer to the map
-   heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data_celsius.iterrows()]
+   heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
    heat_map = folium.plugins.HeatMap(heat_data, gradient=gradient_dict, min_opacity=0.8)
    heat_map.add_to(my_map)
 
