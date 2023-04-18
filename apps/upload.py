@@ -11,24 +11,20 @@ def app():
 # Define the file path for the CSV file
 #filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
 
-#df = pd.read_csv(filepath)
+   # Load data
+    df = pd.read_csv(filepath)
 
-# Display the DataFrame in the app with adjusted height and width
-#st.write(df, height=200, width=100)
+# Define columns
+    left_column, right_column = st.beta_columns(2)
 
+# Display DataFrame in the left column
+    with left_column:
+        st.write(df, height=500)
 
-
-
-
-
-
-
-
-# Read the CSV file into a DataFrame
-#df = pd.read_csv(filepath)
-
-# Display all rows of the DataFrame
-#st.write(df)
+# Add sidebar content in the right column
+    with right_column:
+     st.write("Sidebar content here")
+    # add your sidebar content here
     
     
 
