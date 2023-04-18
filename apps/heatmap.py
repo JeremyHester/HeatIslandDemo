@@ -48,7 +48,7 @@ def app():
 
    # Load HTML file in Streamlit app
    with open('map.html', 'r') as f:
-   html = f.read()
+      html = f.read()
    st.components.v1.html(html, width=700, height=500)
    
 
