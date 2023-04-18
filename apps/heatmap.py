@@ -21,7 +21,7 @@ def app():
    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata2.csv"
 
    # Load data
-   df = pd.read_csv('preliminarydata.csv')
+   df = pd.read_csv(filepath)
 
    # Create map object
    m = folium.Map(location=[df['latitude'].iloc[0], df['longitude'].iloc[0]], zoom_start=15)
