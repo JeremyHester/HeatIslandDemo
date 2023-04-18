@@ -9,7 +9,7 @@ def app():
     st.title("Raw Data Collected")
    
 # Define the file path for the CSV file
-    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
+    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata2.csv"
 
    # Load data
      df = pd.read_csv(filepath)
