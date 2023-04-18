@@ -9,17 +9,14 @@ from folium.plugins import HeatMap
 #reconnecting
 
 
+def folium_html(m):
+   """Converts folium map to HTML"""
+   srcdoc = m._repr_html_()
+   return srcdoc
 
 
 def app():
 
- # Function to convert folium map to HTML
-  def folium_html(m):
-   """Converts folium map to HTML"""
-   srcdoc = m._repr_html_()
-   return srcdoc
- 
- 
    st.title("Heatmap")
    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
 
