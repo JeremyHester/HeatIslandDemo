@@ -8,41 +8,96 @@ from branca.colormap import LinearColormap
 from folium.plugins import HeatMap
 import matplotlib.cm as cm
 
-#reconnecting
-
-
 def folium_html(m):
    """Converts folium map to HTML"""
    srcdoc = m._repr_html_()
    return srcdoc
 
-
 def app():
-
    st.title("Heatmap")
    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata2.csv"
-   
    data = pd.read_csv(filepath)
 
    # Find the first non-zero value for latitude and longitude
    first_lat = data.loc[data['latitude']!=0]['latitude'].iloc[0]
    first_long = data.loc[data['longitude']!=0]['longitude'].iloc[0]
 
-    # Create the map centered at the first non-zero latitude and longitude value
+   # Create the map centered at the first non-zero latitude and longitude value
    map_center = [first_lat, first_long]
    my_map = folium.Map(location=map_center, zoom_start=15)
    
    # Create a LinearColormap
-   colormap = LinearColormap(colors=['green', 'yellow', 'red'], vmin=0, vmax=120)
+   colormap = LinearColormap(colors=['green', 'yellow', 'red'], vmin=0.0, vmax=120.0)
 
-    # Add the colormap to the map
+   # Add the colormap to the map
    my_map.add_child(colormap)
 
-    # Convert the colormap to a dictionary
+   # Convert the colormap to a dictionary
    colormap_dict = colormap.to_dict()
 
-    # Save the map
+   # Add the heatmap layer to the map
+   heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
+   heat_map = folium.plugins.HeatMap(heat_data, gradient=colormap_dict, min_opacity=0.8)
+   heat_map.add_to(my_map)
+
+   # Save map as HTML file
    my_map.save('map.html')
+
+   # Load HTML file in Streamlit app
+   with open('map.html', 'r') as f:
+      html = f.read()
+   st.components.v1.html(html, width=700, height=500)
+
+app()
+
+
+
+
+# import os 
+# import streamlit as st
+# import pandas as pd
+# import numpy as np
+# import folium
+# import folium.plugins as plugins
+# from branca.colormap import LinearColormap
+# from folium.plugins import HeatMap
+# import matplotlib.cm as cm
+
+# #reconnecting
+
+
+# def folium_html(m):
+#    """Converts folium map to HTML"""
+#    srcdoc = m._repr_html_()
+#    return srcdoc
+
+
+# def app():
+
+#    st.title("Heatmap")
+#    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata2.csv"
+   
+#    data = pd.read_csv(filepath)
+
+#    # Find the first non-zero value for latitude and longitude
+#    first_lat = data.loc[data['latitude']!=0]['latitude'].iloc[0]
+#    first_long = data.loc[data['longitude']!=0]['longitude'].iloc[0]
+
+#     # Create the map centered at the first non-zero latitude and longitude value
+#    map_center = [first_lat, first_long]
+#    my_map = folium.Map(location=map_center, zoom_start=15)
+   
+#    # Create a LinearColormap
+#    colormap = LinearColormap(colors=['green', 'yellow', 'red'], vmin=0, vmax=120)
+
+#     # Add the colormap to the map
+#    my_map.add_child(colormap)
+
+#     # Convert the colormap to a dictionary
+#    colormap_dict = colormap.to_dict()
+
+#     # Save the map
+#    my_map.save('map.html')
    
 # Define the color gradient using the brunet colormap
   # gradient_ranges = [-20.0, 32.0, 50.0, 70.0, 90.0, 120.0]
