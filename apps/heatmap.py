@@ -66,16 +66,20 @@ def app():
    map_center = [first_lat, first_long]
    my_map = folium.Map(location=map_center, zoom_start=12)
 
-#    # Add the heatmap layer to the map
+# Define the color gradient
+   gradient = {0.2: 'blue', 0.4: 'cyan', 0.6: 'green', 0.8: 'yellow', 1.0: 'red'}
+
+# Add the heatmap layer to the map
    heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
-   heat_map = folium.plugins.HeatMap(heat_data)
+   heat_map = folium.plugins.HeatMap(heat_data, gradient=gradient)
    heat_map.add_to(my_map)
-    #Save map as HTML file
+
+# Save map as HTML file
    my_map.save('map.html')
 
-   # Load HTML file in Streamlit app
+# Load HTML file in Streamlit app
    with open('map.html', 'r') as f:
-      html = f.read()
+    html = f.read()
    st.components.v1.html(html, width=700, height=500)
    
   
