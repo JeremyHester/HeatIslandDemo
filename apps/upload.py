@@ -7,7 +7,16 @@ import pandas as pd
 def app():
 
     st.title("Raw Data Collected")
+    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata2.csv"
 
+    df = pd.read_csv(filepath)
+
+    df[['latitude', 'time']] = df[['date', 'latitude']]
+    df.drop(columns=['date'], inplace=True)
+
+    # Swap the time and longitude columns
+    df[['longitude', 'date']] = df[['time', 'longitude']]
+    df.drop(columns=['time'], inplace=True)
     
     
 
