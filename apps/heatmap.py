@@ -71,7 +71,7 @@ def app():
    heat_map = folium.plugins.HeatMap(heat_data)
    heat_map.add_to(my_map)
     #Save map as HTML file
-   m.save('map.html')
+   my_map.save('map.html')
 
    # Load HTML file in Streamlit app
    with open('map.html', 'r') as f:
