@@ -12,7 +12,7 @@ def app():
     filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata2.csv"
 
    # Load data
-     df = pd.read_csv(filepath)
+    df = pd.read_csv(filepath)
 
 # Define container with centered layout
     container = st.container()
