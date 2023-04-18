@@ -87,17 +87,17 @@ def app():
    map_center = [first_lat, first_long]
    my_map = folium.Map(location=map_center, zoom_start=15)
    
-   # Create a LinearColormap
-   colormap = LinearColormap(colors=['green', 'yellow', 'red'], vmin=0, vmax=120)
+#    # Create a LinearColormap
+#    colormap = LinearColormap(colors=['green', 'yellow', 'red'], vmin=0, vmax=120)
 
-    # Add the colormap to the map
-   my_map.add_child(colormap)
+#     # Add the colormap to the map
+#    my_map.add_child(colormap)
 
-    # Convert the colormap to a dictionary
-   colormap_dict = colormap.to_dict()
+#     # Convert the colormap to a dictionary
+#    colormap_dict = colormap.to_dict()
 
-    # Save the map
-   my_map.save('map.html')
+#     # Save the map
+#    my_map.save('map.html')
    
 #Define the color gradient using the brunet colormap
    gradient_ranges = [-20.0, 32.0, 50.0, 70.0, 90.0, 120.0]
