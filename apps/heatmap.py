@@ -72,11 +72,10 @@ def app():
 # Define the color gradient dictionary
    gradient_dict = {r: c for r, c in zip(gradient_ranges, gradient_colors)}
 
-   gradient=gradient_dict
    
 # Add the heatmap layer to the map
    heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
-   heat_map = folium.plugins.HeatMap(heat_data, gradient=gradient, min_opacity=0.8)
+   heat_map = folium.plugins.HeatMap(heat_data, gradient=gradient_dict, min_opacity=0.8)
    heat_map.add_to(my_map)
 
 # Save map as HTML file
