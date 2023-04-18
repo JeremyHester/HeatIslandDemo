@@ -18,7 +18,7 @@ def folium_html(m):
 def app():
 
    st.title("Heatmap")
-   filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata.csv"
+   filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata2.csv"
 
    # Load data
    df = pd.read_csv('preliminarydata.csv')
