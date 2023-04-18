@@ -66,7 +66,7 @@ def app():
    map_center = [first_lat, first_long]
    my_map = folium.Map(location=map_center, zoom_start=15)
 
-   gradient_ranges = [-20, 32, 50, 70, 90, 120]  # temperature ranges
+   gradient_ranges = [-20.0, 32.0, 50.0, 70.0, 90.0, 120.0]  # temperature ranges
    gradient_colors = ['blue', 'green', 'yellow', 'orange','red']  # corresponding colors
    
 # Define the color gradient dictionary
