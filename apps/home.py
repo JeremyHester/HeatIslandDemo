@@ -14,7 +14,7 @@ def app():
 
     st.markdown(
         """
-  Use the Heatmap tab to view your map and the Data Set to see the raw data 
+  Here is the path that you walked as you were taking samples! To see the overall heat map, use the "Heatmap" tab, and to see the raw dataset, use the "Data Set" tab
 
     """
     )
