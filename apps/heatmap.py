@@ -64,7 +64,7 @@ def app():
 
     # Create the map centered at the first non-zero latitude and longitude value
    map_center = [first_lat, first_long]
-   my_map = folium.Map(location=map_center, zoom_start=12)
+   my_map = folium.Map(location=map_center, zoom_start=14)
 
 # Define the color gradient
    gradient = {0.2: 'blue', 0.4: 'cyan', 0.6: 'green', 0.8: 'yellow', 1.0: 'red'}
