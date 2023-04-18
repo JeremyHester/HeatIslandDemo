@@ -43,9 +43,13 @@ def app():
    # Add layer control
    folium.LayerControl().add_to(m)
 
-   # Display map in Streamlit app
-   st.markdown(folium_html(m), unsafe_allow_html=True)
+   # Save map as HTML file
+    m.save('map.html')
 
+   # Load HTML file in Streamlit app
+    with open('map.html', 'r') as f:
+    html = f.read()
+    st.components.v1.html(html, width=700, height=500)
    
 
    
