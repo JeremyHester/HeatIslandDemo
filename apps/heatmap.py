@@ -26,13 +26,13 @@ def app():
    colormap = LinearColormap(colors=['green', 'yellow', 'red'], vmin=0, vmax=120)
 
     # Add the colormap to the map
-    my_map.add_child(colormap)
+   my_map.add_child(colormap)
 
     # Convert the colormap to a dictionary
-    colormap_dict = colormap.to_dict()
+   colormap_dict = colormap.to_dict()
 
     # Save the map
-    my_map.save('map.html')
+   my_map.save('map.html')
    
    data = pd.read_csv(filepath)
 
