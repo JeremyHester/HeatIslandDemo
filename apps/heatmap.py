@@ -33,7 +33,7 @@ def app():
 
    
 # Define the color gradient using the brunet colormap
-   gradient_ranges = [-20, 32, 50, 70, 90, 120]
+   gradient_ranges = [-20.0, 32.0, 50.0, 70.0, 90.0, 120.0]
    gradient_colors = [cm.coolwarm(x) for x in range(0, 256, int(256/len(gradient_ranges)-1))]
 
 # Create the gradient dictionary
