@@ -22,6 +22,16 @@ def app():
    st.title("Heatmap")
    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata2.csv"
    
+   data = pd.read_csv(filepath)
+
+   # Find the first non-zero value for latitude and longitude
+   first_lat = data.loc[data['latitude']!=0]['latitude'].iloc[0]
+   first_long = data.loc[data['longitude']!=0]['longitude'].iloc[0]
+
+    # Create the map centered at the first non-zero latitude and longitude value
+   map_center = [first_lat, first_long]
+   my_map = folium.Map(location=map_center, zoom_start=15)
+   
    # Create a LinearColormap
    colormap = LinearColormap(colors=['green', 'yellow', 'red'], vmin=0, vmax=120)
 
@@ -34,20 +44,9 @@ def app():
     # Save the map
    my_map.save('map.html')
    
-   data = pd.read_csv(filepath)
-
-   # Find the first non-zero value for latitude and longitude
-   first_lat = data.loc[data['latitude']!=0]['latitude'].iloc[0]
-   first_long = data.loc[data['longitude']!=0]['longitude'].iloc[0]
-
-    # Create the map centered at the first non-zero latitude and longitude value
-   map_center = [first_lat, first_long]
-   my_map = folium.Map(location=map_center, zoom_start=15)
-
-   
 # Define the color gradient using the brunet colormap
-   gradient_ranges = [-20.0, 32.0, 50.0, 70.0, 90.0, 120.0]
-   gradient_colors = [cm.coolwarm(x) for x in range(0, 256, int(256/len(gradient_ranges)-1))]
+  # gradient_ranges = [-20.0, 32.0, 50.0, 70.0, 90.0, 120.0]
+  # gradient_colors = [cm.coolwarm(x) for x in range(0, 256, int(256/len(gradient_ranges)-1))]
 
   # cmap = LinearColormap(colors=gradient_colors, vmin=min(gradient_ranges), vmax=max(gradient_ranges))
 
