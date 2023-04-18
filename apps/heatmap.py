@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import folium
 import folium.plugins as plugins
+from branca.colormap import LinearColormap
 from folium.plugins import HeatMap
 import matplotlib.cm as cm
 
