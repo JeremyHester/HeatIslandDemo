@@ -18,54 +18,29 @@ def app():
    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata2.csv"
    data = pd.read_csv(filepath)
 
-#    # Find the first non-zero value for latitude and longitude
-#    first_lat = data.loc[data['latitude']!=0]['latitude'].iloc[0]
-#    first_long = data.loc[data['longitude']!=0]['longitude'].iloc[0]
-
-#    # Create the map centered at the first non-zero latitude and longitude value
-#    map_center = [first_lat, first_long]
-#    my_map = folium.Map(location=map_center, zoom_start=15)
-   
-#    # Create a LinearColormap
-#    colormap = LinearColormap(colors=['green', 'yellow', 'red'], vmin=0.0, vmax=120.0)
-
-#    # Add the colormap to the map
-#    my_map.add_child(colormap)
-
-#    # Convert the colormap to a dictionary
-#    colormap_dict = colormap.to_dict()
-
-#    # Add the heatmap layer to the map
-#    heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
-#    heat_map = folium.plugins.HeatMap(heat_data, gradient=colormap_dict, min_opacity=0.8)
-#    heat_map.add_to(my_map)
-
-#    # Save map as HTML file
-#    my_map.save('map.html')
-
-#    # Load HTML file in Streamlit app
-#    with open('map.html', 'r') as f:
-#       html = f.read()
-#    st.components.v1.html(html, width=700, height=500)
-
-# app()
-
-
-####### "working" color
-
-# Find the first non-zero value for latitude and longitude
+   # Find the first non-zero value for latitude and longitude
    first_lat = data.loc[data['latitude']!=0]['latitude'].iloc[0]
    first_long = data.loc[data['longitude']!=0]['longitude'].iloc[0]
 
-    # Create the map centered at the first non-zero latitude and longitude value
+   # Create the map centered at the first non-zero latitude and longitude value
    map_center = [first_lat, first_long]
-   my_map = folium.Map(location=map_center, zoom_start=12)
+   my_map = folium.Map(location=map_center, zoom_start=15)
+   
+   # Create a LinearColormap
+   colormap = LinearColormap(colors=['green', 'yellow', 'red'], vmin=0.0, vmax=120.0)
 
-#    # Add the heatmap layer to the map
+   # Add the colormap to the map
+   my_map.add_child(colormap)
+
+   # Convert the colormap to a dictionary
+   colormap_dict = colormap.to_dict()
+
+   # Add the heatmap layer to the map
    heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
-   heat_map = folium.plugins.HeatMap(heat_data)
+   heat_map = folium.plugins.HeatMap(heat_data, gradient=colormap_dict, min_opacity=0.8)
    heat_map.add_to(my_map)
-    #Save map as HTML file
+
+   # Save map as HTML file
    my_map.save('map.html')
 
    # Load HTML file in Streamlit app
@@ -73,8 +48,33 @@ def app():
       html = f.read()
    st.components.v1.html(html, width=700, height=500)
 
+app()
 
 
+####### "working" color ####
+
+# # Find the first non-zero value for latitude and longitude
+#    first_lat = data.loc[data['latitude']!=0]['latitude'].iloc[0]
+#    first_long = data.loc[data['longitude']!=0]['longitude'].iloc[0]
+
+#     # Create the map centered at the first non-zero latitude and longitude value
+#    map_center = [first_lat, first_long]
+#    my_map = folium.Map(location=map_center, zoom_start=12)
+
+# #    # Add the heatmap layer to the map
+#    heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
+#    heat_map = folium.plugins.HeatMap(heat_data)
+#    heat_map.add_to(my_map)
+#     #Save map as HTML file
+#    my_map.save('map.html')
+
+#    # Load HTML file in Streamlit app
+#    with open('map.html', 'r') as f:
+#       html = f.read()
+#    st.components.v1.html(html, width=700, height=500)
+
+
+###### "end of working color" #####
 
 
 
