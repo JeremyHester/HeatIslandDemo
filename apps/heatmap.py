@@ -20,8 +20,47 @@ def app():
 
    st.title("Heatmap")
    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata2.csv"
+ 
+   data = pd.read_csv(filepath)
 
-   # Load data
+   # Find the first non-zero value for latitude and longitude
+   first_lat = data.loc[data['latitude']!=0]['latitude'].iloc[0]
+   first_long = data.loc[data['longitude']!=0]['longitude'].iloc[0]
+
+    # Create the map centered at the first non-zero latitude and longitude value
+   map_center = [first_lat, first_long]
+   my_map = folium.Map(location=map_center, zoom_start=15)
+
+   
+# Define the color gradient using the brunet colormap
+   gradient_ranges = [-20, 32, 50, 70, 90, 120]
+   gradient_colors = [cm.coolwarm(x) for x in range(0, 256, int(256/len(gradient_ranges)-1))]
+
+# Create the gradient dictionary
+   gradient_dict = {gradient_ranges[i]: gradient_colors[i] for i in range(len(gradient_ranges))}
+
+# Add the heatmap layer to the map
+   heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
+   heat_map = folium.plugins.HeatMap(heat_data, gradient=gradient_dict, min_opacity=0.8)
+   heat_map.add_to(my_map)
+
+# Save map as HTML file
+   my_map.save('map.html')
+
+# Load HTML file in Streamlit app
+   with open('map.html', 'r') as f:
+    html = f.read()
+   st.components.v1.html(html, width=700, height=500)
+   
+  
+   
+#    # Display the map using Streamlit
+   # st.markdown(my_map._repr_html_(), unsafe_allow_html=True)
+
+
+  
+    
+     # Load data
    #df = pd.read_csv(filepath)
 
    # Create map object
@@ -55,48 +94,6 @@ def app():
 
    
    
-   
-   
-   data = pd.read_csv(filepath)
-
-   # Find the first non-zero value for latitude and longitude
-   first_lat = data.loc[data['latitude']!=0]['latitude'].iloc[0]
-   first_long = data.loc[data['longitude']!=0]['longitude'].iloc[0]
-
-    # Create the map centered at the first non-zero latitude and longitude value
-   map_center = [first_lat, first_long]
-   my_map = folium.Map(location=map_center, zoom_start=15)
-
-   
-# Define the color gradient using the brunet colormap
-   gradient_ranges = [-20, 32, 50, 70, 90, 120]
-   gradient_colors = [cm.brunet(x) for x in range(0, 256, int(256/len(gradient_ranges)-1))]
-
-# Create the gradient dictionary
-   gradient_dict = {gradient_ranges[i]: gradient_colors[i] for i in range(len(gradient_ranges))}
-
-# Add the heatmap layer to the map
-   heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
-   heat_map = folium.plugins.HeatMap(heat_data, gradient=gradient_dict, min_opacity=0.8)
-   heat_map.add_to(my_map)
-
-# Save map as HTML file
-   my_map.save('map.html')
-
-# Load HTML file in Streamlit app
-   with open('map.html', 'r') as f:
-    html = f.read()
-   st.components.v1.html(html, width=700, height=500)
-   
-  
-   
-#    # Display the map using Streamlit
-   # st.markdown(my_map._repr_html_(), unsafe_allow_html=True)
-
-
-  
-    
-    
     
   
     
