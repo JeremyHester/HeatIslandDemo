@@ -1,29 +1,32 @@
 import streamlit as st
 import pandas as pd
+from bokeh.io import show
 from bokeh.plotting import figure
-from bokeh.models import LinearColorMapper, ColorBar, ColumnDataSource
-from bokeh.palettes import inferno
-from bokeh.layouts import column
+from bokeh.models import ColumnDataSource
+from bokeh.palettes import Viridis256
+from bokeh.transform import linear_cmap
 
 def app():
     st.title("Heatmap")
     filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata2.csv"
     data = pd.read_csv(filepath)
 
-    # Create the heatmap plot
-    x = data['longitude'].tolist()
-    y = data['latitude'].tolist()
-    colors = data['temperature'].tolist()
-    source = ColumnDataSource(data=dict(x=x, y=y, colors=colors))
+    # Get the data for the heatmap
+    x = data['longitude']
+    y = data['latitude']
+    colors = data['temperature']
 
-    color_mapper = LinearColorMapper(palette=inferno(256), low=min(colors), high=max(colors))
-    color_bar = ColorBar(color_mapper=color_mapper, location=(0, 0))
+    # Create a color mapper based on temperature values
+    color_mapper = linear_cmap(field_name='colors', palette=Viridis256, low=min(colors), high=max(colors))
 
-    heatmap = figure(plot_width=700, plot_height=500, x_range=(min(x), max(x)), y_range=(min(y), max(y)))
-    heatmap.rect(x='x', y='y', width=0.01, height=0.01, source=source, fill_color={'field': 'colors', 'transform': color_mapper})
+    # Create the Bokeh figure
+    heatmap = figure(width=700, height=500, x_range=(min(x), max(x)), y_range=(min(y), max(y)))
+    heatmap.add_tile(bokeh.tile_providers.CARTODBPOSITRON_RETINA)
 
-    heatmap.add_layout(color_bar, 'right')
+    # Add the heatmap to the figure
+    heatmap.circle(x=x, y=y, color=color_mapper, source=ColumnDataSource({'x': x, 'y': y, 'colors': colors}), size=2, alpha=0.8)
 
+    # Show the figure
     st.bokeh_chart(heatmap)
 
 app()
