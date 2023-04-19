@@ -9,28 +9,28 @@ from bokeh.tile_providers import CARTODBPOSITRON_RETINA
 
 def app():
     st.title("Heatmap")
-    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata2.csv"
-    data = pd.read_csv(filepath)
+#     filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata2.csv"
+#     data = pd.read_csv(filepath)
 
-    # Get the data for the heatmap
-    x = data['longitude']
-    y = data['latitude']
-    colors = data['temperature']
+#     # Get the data for the heatmap
+#     x = data['longitude']
+#     y = data['latitude']
+#     colors = data['temperature']
 
-    # Create a color mapper based on temperature values
-    color_mapper = linear_cmap(field_name='colors', palette=Viridis256, low=min(colors), high=max(colors))
+#     # Create a color mapper based on temperature values
+#     color_mapper = linear_cmap(field_name='colors', palette=Viridis256, low=min(colors), high=max(colors))
 
-    # Create the Bokeh figure
-    heatmap = figure(width=700, height=500, x_range=(min(x), max(x)), y_range=(min(y), max(y)))
-    heatmap.add_tile(bokeh.tile_providers.CARTODBPOSITRON_RETINA)
+#     # Create the Bokeh figure
+#     heatmap = figure(width=700, height=500, x_range=(min(x), max(x)), y_range=(min(y), max(y)))
+#     heatmap.add_tile(bokeh.tile_providers.CARTODBPOSITRON_RETINA)
 
-    # Add the heatmap to the figure
-    heatmap.circle(x=x, y=y, color=color_mapper, source=ColumnDataSource({'x': x, 'y': y, 'colors': colors}), size=2, alpha=0.8)
+#     # Add the heatmap to the figure
+#     heatmap.circle(x=x, y=y, color=color_mapper, source=ColumnDataSource({'x': x, 'y': y, 'colors': colors}), size=2, alpha=0.8)
 
-    # Show the figure
-    st.bokeh_chart(heatmap)
+#     # Show the figure
+#     st.bokeh_chart(heatmap)
 
-app()
+# app()
 
 
 ####working partially code for color bar at top####
