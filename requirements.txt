@@ -1,5 +1,5 @@
 --find-links=https://girder.github.io/large_image_wheels GDAL
-branca
+Branca
 Colorcet
 folium
 geemap
