@@ -1,11 +1,10 @@
 import streamlit as st
 import pandas as pd
 import folium
+from folium.plugins import HeatMap, ImageOverlay
 import numpy as np
 import colorcet
-import branca.colormap as colormap
 
-#reboot attempt#
 def app():
     st.title("Heatmap")
     filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata2.csv"
@@ -21,14 +20,20 @@ def app():
 
     # Add the heatmap layer to the map
     heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
-    heat_map = folium.plugins.HeatMap(heat_data, min_opacity=0.8)
-    heat_map.add_to(my_map)
+    HeatMap(heat_data, min_opacity=0.8).add_to(my_map)
 
-    # Add a layer of colors based on temperature
-    colorscale = colorcet.CET_L8
-    colormap = branca.colormap.LinearColormap(colors=colorscale, index=[-20, 120], vmin=-20, vmax=120)
-    colormap.caption = "Temperature (°F)"
-    colormap.add_to(my_map)
+    # Create a color map based on temperature values
+    colorscale = colorcet.fire
+    data['color'] = pd.cut(data['temperature'], bins=len(colorscale), labels=colorscale)
+    data['color'] = data['color'].apply(lambda x: '#' + x[1:])
+
+    # Create an ImageOverlay with the color map
+    img = np.zeros((512, 512, 3), dtype=int)
+    for i, color in enumerate(colorscale):
+        img[:, i:i+1, :] = np.array(color)[:-1]
+    img = (255 * img).astype(np.uint8)
+    img_bounds = [[data['latitude'].min(), data['longitude'].min()], [data['latitude'].max(), data['longitude'].max()]]
+    ImageOverlay(image=img, bounds=img_bounds, opacity=0.6).add_to(my_map)
 
     # Save map as HTML file
     my_map.save('map.html')
@@ -39,6 +44,7 @@ def app():
     st.components.v1.html(html, width=700, height=500)
 
 app()
+
 
 
 
