@@ -3,6 +3,7 @@ import pandas as pd
 import folium
 import numpy as np
 import colorcet
+import branca.colormap as colormap
 
 #reboot attempt#
 def app():
