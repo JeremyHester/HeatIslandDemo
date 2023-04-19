@@ -4,6 +4,7 @@ import folium
 import numpy as np
 import colorcet
 
+#reboot attempt#
 def app():
     st.title("Heatmap")
     filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata2.csv"
