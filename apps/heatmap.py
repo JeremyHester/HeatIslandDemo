@@ -40,6 +40,20 @@ def app():
    heat_map = folium.plugins.HeatMap(heat_data, gradient=colormap_dict, min_opacity=0.8)
    heat_map.add_to(my_map)
 
+    for index, row in data.iterrows():
+       temp = row['temperature']
+       if temp < -20:
+           color = 'white'
+       elif -20 <= temp < 0:
+           color = 'blue'
+       elif 0 <= temp < 20:
+           color = 'green'
+       elif 20 <= temp < 40:
+           color = 'yellow'
+       else:
+           color = 'red'
+       folium.Marker([row['latitude'], row['longitude']], icon=folium.Icon(color=color)).add_to(my_map)
+   
    # Save map as HTML file
    my_map.save('map.html')
 
