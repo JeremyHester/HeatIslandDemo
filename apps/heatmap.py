@@ -1,17 +1,8 @@
-import os 
 import streamlit as st
 import pandas as pd
-import numpy as np
 import folium
-import folium.plugins as plugins
-from branca.colormap import LinearColormap
-from folium.plugins import HeatMap
-import matplotlib.cm as cm
-
-def folium_html(m):
-   """Converts folium map to HTML"""
-   srcdoc = m._repr_html_()
-   return srcdoc
+import numpy as np
+import colorcet
 
 def app():
    st.title("Heatmap")
@@ -25,35 +16,29 @@ def app():
    # Create the map centered at the first non-zero latitude and longitude value
    map_center = [first_lat, first_long]
    my_map = folium.Map(location=map_center, zoom_start=15)
-   
-   # Create a LinearColormap
-   colormap = LinearColormap(colors=['white', 'blue', 'green', 'yellow', 'red'], vmin=-20.0, vmax=120.0)
 
-   # Add the colormap to the map
-   my_map.add_child(colormap)
+   # Create a colormap using the colorcet library
+   colormap = colorcet.b_gw_20
 
-   # Convert the colormap to a dictionary
-   colormap_dict = colormap.to_dict()
+   # Compute the color values for the temperature data using the colormap
+   temp_range = [data['temperature'].min(), data['temperature'].max()]
+   colors = np.interp(data['temperature'], temp_range, [0, len(colormap)])
+   colors = [colormap[int(color_idx)] for color_idx in colors]
+
+   # Create an ImageOverlay layer using the color values and add it to the map
+   image_overlay = folium.plugins.ImageOverlay(
+      image=colors,
+      bounds=[[data['latitude'].min(), data['longitude'].min()], [data['latitude'].max(), data['longitude'].max()]],
+      opacity=0.5,
+      mercator_project=True
+   )
+   image_overlay.add_to(my_map)
 
    # Add the heatmap layer to the map
    heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
-   heat_map = folium.plugins.HeatMap(heat_data, gradient=colormap_dict, min_opacity=0.8)
+   heat_map = folium.plugins.HeatMap(heat_data, min_opacity=0.8)
    heat_map.add_to(my_map)
 
-   for index, row in data.iterrows():
-      temp = row['temperature']
-      if temp < -20:
-          color = 'white'
-      elif -20 <= temp < 0:
-          color = 'blue'
-      elif 0 <= temp < 20:
-          color = 'green'
-      elif 20 <= temp < 40:
-          color = 'yellow'
-      else:
-          color = 'red'
-      folium.Marker([row['latitude'], row['longitude']], icon=folium.Icon(color=color)).add_to(my_map)
-   
    # Save map as HTML file
    my_map.save('map.html')
 
@@ -64,6 +49,91 @@ def app():
 
 app()
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+####working partially code for color bar at top####
+# import os 
+# import streamlit as st
+# import pandas as pd
+# import numpy as np
+# import folium
+# import folium.plugins as plugins
+# from branca.colormap import LinearColormap
+# from folium.plugins import HeatMap
+# import matplotlib.cm as cm
+
+# def folium_html(m):
+#    """Converts folium map to HTML"""
+#    srcdoc = m._repr_html_()
+#    return srcdoc
+
+# def app():
+#    st.title("Heatmap")
+#    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata2.csv"
+#    data = pd.read_csv(filepath)
+
+#    # Find the first non-zero value for latitude and longitude
+#    first_lat = data.loc[data['latitude']!=0]['latitude'].iloc[0]
+#    first_long = data.loc[data['longitude']!=0]['longitude'].iloc[0]
+
+#    # Create the map centered at the first non-zero latitude and longitude value
+#    map_center = [first_lat, first_long]
+#    my_map = folium.Map(location=map_center, zoom_start=15)
+   
+#    # Create a LinearColormap
+#    colormap = LinearColormap(colors=['white', 'blue', 'green', 'yellow', 'red'], vmin=-20.0, vmax=120.0)
+
+#    # Add the colormap to the map
+#    my_map.add_child(colormap)
+
+#    # Convert the colormap to a dictionary
+#    colormap_dict = colormap.to_dict()
+
+#    # Add the heatmap layer to the map
+#    heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
+#    heat_map = folium.plugins.HeatMap(heat_data, gradient=colormap_dict, min_opacity=0.8)
+#    heat_map.add_to(my_map)
+
+#    for index, row in data.iterrows():
+#       temp = row['temperature']
+#       if temp < -20:
+#           color = 'white'
+#       elif -20 <= temp < 0:
+#           color = 'blue'
+#       elif 0 <= temp < 20:
+#           color = 'green'
+#       elif 20 <= temp < 40:
+#           color = 'yellow'
+#       else:
+#           color = 'red'
+#       folium.Marker([row['latitude'], row['longitude']], icon=folium.Icon(color=color)).add_to(my_map)
+   
+#    # Save map as HTML file
+#    my_map.save('map.html')
+
+#    # Load HTML file in Streamlit app
+#    with open('map.html', 'r') as f:
+#       html = f.read()
+#    st.components.v1.html(html, width=700, height=500)
+
+# app()
+
+###end of working with bar on top and needing a layer###
 
 ####### "working" color ####
 
