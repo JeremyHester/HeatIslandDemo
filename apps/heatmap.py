@@ -105,11 +105,12 @@ def app():
 ####### "working" color ####
 
 # Find the first non-zero value for latitude and longitude
- first_lat = data.loc[data['latitude']!=0]['latitude'].iloc[0]
- first_long = data.loc[data['longitude']!=0]['longitude'].iloc[0]
+
+#  first_lat = data.loc[data['latitude']!=0]['latitude'].iloc[0]
+#  first_long = data.loc[data['longitude']!=0]['longitude'].iloc[0]
 
     # Create the map centered at the first non-zero latitude and longitude value
- map_center = [first_lat, first_long]
+ map_center = [29.888, 97.9]
  my_map = folium.Map(location=map_center, zoom_start=12)
 
 #    # Add the heatmap layer to the map
