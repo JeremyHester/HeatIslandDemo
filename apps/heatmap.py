@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import bokeh
 from bokeh.io import show
 from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource
