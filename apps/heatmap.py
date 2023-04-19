@@ -9,8 +9,8 @@ from bokeh.tile_providers import CARTODBPOSITRON_RETINA
 
 def app():
     st.title("Heatmap")
-#     filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata2.csv"
-#     data = pd.read_csv(filepath)
+    filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata2.csv"
+    data = pd.read_csv(filepath)
 
 #     # Get the data for the heatmap
 #     x = data['longitude']
