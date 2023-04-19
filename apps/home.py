@@ -19,7 +19,7 @@ def app():
     """
     )
     filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata2.csv"
-     # Load data
+    # Read CSV data
     df = pd.read_csv(filepath)
 
     # Create map object
@@ -31,19 +31,18 @@ def app():
     path.add_child(folium.PolyLine(locations=locations, color='blue', weight=5))
     m.add_child(path)
 
-    # Create feature group for temperature data
-    temp_data = folium.FeatureGroup(name='Temperature Data')
-    temperatures = list(df['temperature'])
+    # Create feature group for data markers
+    data = folium.FeatureGroup(name='Data')
     cmap = folium.LinearColormap(['blue', 'green', 'yellow', 'red'], vmin=79, vmax=87)
     for i, row in df.iterrows():
-        location = (row['latitude'], row['longitude'])
-        temp = row['temperature']
-        humidity = row['humidity']
-        time = row['time']
-        popup_html = f'Temperature: {temp:.2f}°F<br>Humidity: {humidity:.2f}%<br>Time: {time}'
-        marker = folium.Marker(location=location, icon=folium.Icon(color=cmap(temp), icon='info-sign'), popup=popup_html)
-        data.add_child(marker)
-    m.add_child(temp_data)
+     location = (row['latitude'], row['longitude'])
+     temp = row['temperature']
+     humidity = row['humidity']
+     time = row['time']
+     popup_html = f'Temperature: {temp:.2f}°F<br>Humidity: {humidity:.2f}%<br>Time: {time}'
+     marker = folium.Marker(location=location, icon=folium.Icon(color=cmap(temp), icon='info-sign'), popup=popup_html)
+     data.add_child(marker)
+    m.add_child(data)
 
     # Add layer control
     folium.LayerControl().add_to(m)
@@ -53,6 +52,6 @@ def app():
 
     # Load HTML file in Streamlit app
     with open('map.html', 'r') as f:
-     html = f.read()
+      html = f.read()
     st.components.v1.html(html, width=700, height=500)
     
