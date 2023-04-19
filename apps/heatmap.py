@@ -1,11 +1,11 @@
 import streamlit as st
 import pandas as pd
 import bokeh
-from bokeh.io import show
-from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource
 from bokeh.palettes import Viridis256
 from bokeh.transform import linear_cmap
+from bokeh.plotting import figure, output_file, show
+from bokeh.tile_providers import CARTODBPOSITRON_RETINA
 
 def app():
     st.title("Heatmap")
