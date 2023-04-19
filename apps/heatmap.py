@@ -27,7 +27,7 @@ def app():
    my_map = folium.Map(location=map_center, zoom_start=15)
    
    # Create a LinearColormap
-   colormap = LinearColormap(colors=['blue', 'green', 'yellow', 'red'], vmin=-20.0, vmax=120.0)
+   colormap = LinearColormap(colors=['blue', 'yellow', 'red'], vmin=-20.0, vmax=120.0)
 
    # Add the colormap to the map
    my_map.add_child(colormap)
