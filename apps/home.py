@@ -35,10 +35,14 @@ def app():
     temp_data = folium.FeatureGroup(name='Temperature Data')
     temperatures = list(df['temperature'])
     cmap = folium.LinearColormap(['blue', 'green', 'yellow', 'red'], vmin=79, vmax=87)
-    for location, temp in zip(locations, temperatures):
-     marker = folium.Marker(location=location, icon=folium.Icon(color=cmap(temp), icon='info-sign'))
-     marker.add_child(folium.Popup(f'Temperature: {temp} °F'))
-     temp_data.add_child(marker)
+    for i, row in df.iterrows():
+        location = (row['latitude'], row['longitude'])
+        temp = row['temperature']
+        humidity = row['humidity']
+        time = row['time']
+        popup_html = f'Temperature: {temp:.2f}°F<br>Humidity: {humidity:.2f}%<br>Time: {time}'
+        marker = folium.Marker(location=location, icon=folium.Icon(color=cmap(temp), icon='info-sign'), popup=popup_html)
+        data.add_child(marker)
     m.add_child(temp_data)
 
     # Add layer control
