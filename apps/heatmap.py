@@ -1,51 +1,32 @@
 import streamlit as st
 import pandas as pd
-import folium
-from folium.plugins import HeatMap, ImageOverlay
-import numpy as np
-import colorcet
+from bokeh.plotting import figure
+from bokeh.models import LinearColorMapper, ColorBar, ColumnDataSource
+from bokeh.palettes import inferno
+from bokeh.layouts import column
 
 def app():
     st.title("Heatmap")
     filepath = "https://raw.githubusercontent.com/JeremyHester/HeatIslandDemo/master/preliminarydata2.csv"
     data = pd.read_csv(filepath)
 
-    # Find the first non-zero value for latitude and longitude
-    first_lat = data.loc[data['latitude']!=0]['latitude'].iloc[0]
-    first_long = data.loc[data['longitude']!=0]['longitude'].iloc[0]
+    # Create the heatmap plot
+    x = data['longitude'].tolist()
+    y = data['latitude'].tolist()
+    colors = data['temperature'].tolist()
+    source = ColumnDataSource(data=dict(x=x, y=y, colors=colors))
 
-    # Create the map centered at the first non-zero latitude and longitude value
-    map_center = [first_lat, first_long]
-    my_map = folium.Map(location=map_center, zoom_start=15)
+    color_mapper = LinearColorMapper(palette=inferno(256), low=min(colors), high=max(colors))
+    color_bar = ColorBar(color_mapper=color_mapper, location=(0, 0))
 
-    # Add the heatmap layer to the map
-    heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
-    HeatMap(heat_data, min_opacity=0.8).add_to(my_map)
+    heatmap = figure(plot_width=700, plot_height=500, x_range=(min(x), max(x)), y_range=(min(y), max(y)))
+    heatmap.rect(x='x', y='y', width=0.01, height=0.01, source=source, fill_color={'field': 'colors', 'transform': color_mapper})
 
-    # Create a color map based on temperature values
-    colorscale = colorcet.fire
-    data['color'] = pd.cut(data['temperature'], bins=len(colorscale), labels=colorscale)
-    data['color'] = data['color'].apply(lambda x: '#' + x[1:])
+    heatmap.add_layout(color_bar, 'right')
 
-    # Create an ImageOverlay with the color map
-    img = np.zeros((512, 512, 3), dtype=int)
-    for i, color in enumerate(colorscale):
-        img[:, i:i+1, :] = np.array(color)[:-1]
-    img = (255 * img).astype(np.uint8)
-    img_bounds = [[data['latitude'].min(), data['longitude'].min()], [data['latitude'].max(), data['longitude'].max()]]
-    ImageOverlay(image=img, bounds=img_bounds, opacity=0.6).add_to(my_map)
-
-    # Save map as HTML file
-    my_map.save('map.html')
-
-    # Load HTML file in Streamlit app
-    with open('map.html', 'r') as f:
-        html = f.read()
-    st.components.v1.html(html, width=700, height=500)
+    st.bokeh_chart(heatmap)
 
 app()
-
-
 
 
 ####working partially code for color bar at top####
