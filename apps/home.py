@@ -40,7 +40,7 @@ def app():
      humidity = row['humidity']
      time = row['time']
      popup_html = f'Temperature: {temp:.2f}°F<br>Humidity: {humidity:.2f}%<br>Time: {time}'
-     marker = folium.Marker(location=location, icon=folium.Icon(color=cmap(temp), icon='info-sign'), popup=popup_html)
+     marker = folium.Marker(location=location, icon=folium.Icon(color=cmap(temp), icon='location-pin'), popup=popup_html)
      data.add_child(marker)
     m.add_child(data)
 
