@@ -112,7 +112,7 @@ def app():
 #first_long = data.loc[data['longitude']!=0]['longitude'].iloc[0]
 
     # Create the map centered at the first non-zero latitude and longitude value
-    map_center = [29.8884, 97.9384]
+    map_center = [29.8884, -97.9384]
     my_map = folium.Map(location=map_center, zoom_start=12)
 
 #    # Add the heatmap layer to the map
