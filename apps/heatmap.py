@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import bokeh
+import folium
 from bokeh.models import ColumnDataSource
 from bokeh.palettes import Viridis256
 from bokeh.transform import linear_cmap
