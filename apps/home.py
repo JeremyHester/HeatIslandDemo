@@ -33,7 +33,7 @@ def app():
 
     # Create feature group for data markers
     data = folium.FeatureGroup(name='Data')
-    cmap = folium.LinearColormap(['blue', 'green', 'yellow', 'red'], vmin=79, vmax=87)
+    cmap = folium.LinearColormap(['blue', 'green', 'yellow', 'red'], vmin=5, vmax=120)
     for i, row in df.iterrows():
      location = (row['latitude'], row['longitude'])
      temp = row['temperature']
