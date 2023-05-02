@@ -40,7 +40,18 @@ def app():
      humidity = row['humidity']
      time = row['time']
      popup_html = f'Temperature: {temp:.2f}°F<br>Humidity: {humidity:.2f}%<br>Time: {time}'
-     marker = folium.Marker(location=location, icon=folium.Icon(color=cmap(temp), icon='location-pin'), popup=popup_html)
+     if temp<20
+        marker = folium.Marker(location=location, icon=folium.Icon(color='lightblue', icon='location-pin'), popup=popup_html)
+     elif temp>=20 and temp<40
+        marker = folium.Marker(location=location, icon=folium.Icon(color='blue', icon='location-pin'), popup=popup_html)
+     elif temp>=40 and temp<60
+        marker = folium.Marker(location=location, icon=folium.Icon(color='green', icon='location-pin'), popup=popup_html)
+     elif temp>=60 and temp<80
+        marker = folium.Marker(location=location, icon=folium.Icon(color='orange', icon='location-pin'), popup=popup_html)
+     elif temp>=80 and temp<90
+        marker = folium.Marker(location=location, icon=folium.Icon(color='lightred', icon='location-pin'), popup=popup_html)
+     elif temp>=90 and temp<120
+        marker = folium.Marker(location=location, icon=folium.Icon(color='red', icon='location-pin'), popup=popup_html)
      data.add_child(marker)
     m.add_child(data)
 
