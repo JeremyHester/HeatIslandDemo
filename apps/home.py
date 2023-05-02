@@ -49,8 +49,8 @@ def app():
      elif temp >= 60 and temp < 76:
         marker = folium.Marker(location=location, icon=folium.Icon(color='orange', icon='location-pin'), popup=popup_html)
      elif temp >= 60 and temp < 76:
-        marker = folium.Marker(location=location, icon=folium.Icon(color='yellow', icon='location-pin'), popup=popup_html)
-     elif temp >= 80 and temp < 80:
+        marker = folium.Marker(location=location, icon=folium.Icon(color='pink', icon='location-pin'), popup=popup_html)
+     elif temp >= 76 and temp < 80:
         marker = folium.Marker(location=location, icon=folium.Icon(color='lightred', icon='location-pin'), popup=popup_html)
      elif temp >= 80 and temp < 120:
         marker = folium.Marker(location=location, icon=folium.Icon(color='red', icon='location-pin'), popup=popup_html)
