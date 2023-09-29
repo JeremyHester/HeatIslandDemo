@@ -18,7 +18,7 @@ def app():
     container = st.container()
     with container:
     # Define columns
-     left_column, right_column = st.beta_columns(2)
+     left_column, right_column = st.columns(2)
     # Display DataFrame in the left column
     with left_column:
         st.write(df, height=500)
